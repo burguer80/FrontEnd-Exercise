@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'carrierwave'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -11,4 +11,5 @@ end
 gem 'jquery-rails'
 gem 'pry-rails', :group => :development
 gem 'puma'
-
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem "sqlite3-ruby", :require => "sqlite3"
