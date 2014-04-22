@@ -43,7 +43,8 @@ end
 
 def guardar_foto
 	@foto =  Foto.new(params[:foto])
-	if @foto.save
+	 usuario = Usuario.find(session[:usuario])
+  	if usuario.fotos << @foto
 		flash[:mensaje] = "Foto guardada con exito"
 		redirect_to :action => 'index'
 	else
