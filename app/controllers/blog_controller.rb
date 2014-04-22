@@ -1,6 +1,38 @@
 class BlogController < ApplicationController
- #http_basic_authenticate_with :name => "sergio", 
- #							  :password => "secreto"
+  #<--valida excepto el login------------------->
+  before_filter :valida_autentificacion, :except => [:login, :index, :registro, :crear_usuario]
+  #<--protege los metodos criticos------------------->
+  skip_before_filter :valida_autentificacion!, :except => [:foto_nueva, :guardar_foto]
+
+
+
+ def valida_autentificacion
+ 	unless session[:usuario]
+    	redirect_to :action => "login"
+    end
+end
+
+def logout
+       session[:usuario] = nil
+       redirect_to :action => 'login'
+end
+
+def login
+    if request.post?
+  		  @usuario = Usuario.find_by_email(params[:usuario][:email])
+  			if @usuario && @usuario.authenticate(params[:usuario][:password])
+ 			   session[:usuario] = @usuario.id
+ 			   redirect_to :action => 'foto_nueva'
+  			 else
+  			   flash[:mensaje] = "Email o contrasena invalida"
+   			   render :action => 'login'
+   			end
+ else
+   @usuario = Usuario.new
+ end
+end
+
+
 def index
 	@fotos = Foto.all
 end

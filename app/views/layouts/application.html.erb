@@ -7,6 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= link_to 'Fotos', :action => 'index'%>
+<%= link_to 'Foto Nueva', :action => 'foto_nueva'%>
+<%= link_to 'Logout', :action => 'logout'%>
+
+
 <% if flash[:mensaje] %>
 	<h4><%= flash[:mensaje] %></h4>
 <% end %>
