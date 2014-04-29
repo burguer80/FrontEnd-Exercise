@@ -8,7 +8,7 @@
 </head>
 <body>
 <% if flash[:mensaje] %>
-	<h4><%= flash[:mensaje] %></h4>
+	<h4><%= flash[:mensaje].html_safe %></h4>
 <% end %>
 
 <%= yield %>
